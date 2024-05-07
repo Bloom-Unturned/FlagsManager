@@ -6,11 +6,12 @@ using Microsoft.Extensions.Logging;
 using OpenMod.API.Plugins;
 using OpenMod.EntityFrameworkCore.MySql.Extensions;
 using OpenMod.Unturned.Plugins;
-using OpenmodDatabaseExample.Databases;
+using FlagsManager.Commands;
+using FlagsManager.Databases;
 
 // For more, visit https://openmod.github.io/openmod-docs/devdoc/guides/getting-started.html
 
-namespace OpenmodDatabaseExample
+namespace FlagsManager
 {
     public class PluginContainerConfigurator : IPluginContainerConfigurator
     {

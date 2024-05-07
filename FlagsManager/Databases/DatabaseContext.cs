@@ -1,19 +1,13 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
-using OpenMod.API.Plugins;
 using OpenMod.EntityFrameworkCore.Configurator;
 using OpenMod.EntityFrameworkCore;
-using OpenMod.Unturned.Plugins;
-using OpenmodDatabaseExample.Models.Players;
 using Microsoft.Extensions.DependencyInjection;
 using OpenMod.API.Ioc;
 using OpenMod.API.Prioritization;
+using FlagsManager.Models.Flags;
 
-namespace OpenmodDatabaseExample.Databases
+namespace FlagsManager.Databases
 {
     [PluginServiceImplementation(Lifetime = ServiceLifetime.Singleton, Priority = Priority.Lowest)]
     public class DatabaseContext : OpenModDbContext<DatabaseContext>
@@ -27,6 +21,11 @@ namespace OpenmodDatabaseExample.Databases
         {
             return m_ServiceProvider.GetRequiredService<DatabaseContext>();
         }
-        public DbSet<Players> Players => Set<Players>();
+        public DbSet<Flags> Flags => Set<Flags>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Flags>()
+                .HasKey(f => new { f.SteamID, f.id });
+        }
     }
 }
